@@ -3,9 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/dashboard": "pages/dashboard.js",
-  "/privacy": "pages/privacy.js",
-  "/terms": "pages/terms.js",
-  "/api/ideas": "pages/api/ideas.js",
-  "/api/user": "pages/api/user.js"
+  "/pricing": "pages/pricing.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js"
 }

@@ -5,27 +5,35 @@
 	--font-mono: 'JetBrains Mono', 'Menlo', 'Monaco',
 		'Consolas', monospace;
 	--color-bg: #f8fafc;
+	--color-bg-secondary: #fff;
 	--color-text: #1e293b;
 	--color-primary: #2563eb;
-	--color-secondary: #f59e42;
+	--color-accent: #f59e42;
 	--color-border: #e5e7eb;
-	--color-card: #fff;
-	--color-error: #ef4444;
-	--color-success: #22c55e;
+	--color-card: #f3f4f6;
+	--color-shadow: 0 4px 24px 0 rgba(37, 99, 235, 0.08);
 	--color-muted: #64748b;
+	--color-success: #22c55e;
+	--color-error: #ef4444;
+	--color-warning: #facc15;
+	--radius: 0.75rem;
+	--transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-bg: #181f2a;
+		--color-bg: #101624;
+		--color-bg-secondary: #181f2e;
 		--color-text: #e0e7ef;
 		--color-primary: #60a5fa;
-		--color-secondary: #fbbf24;
-		--color-border: #334155;
-		--color-card: #232b3a;
-		--color-error: #f87171;
-		--color-success: #4ade80;
+		--color-accent: #fbbf24;
+		--color-border: #232b3b;
+		--color-card: #1a2233;
+		--color-shadow: 0 4px 24px 0 rgba(96, 165, 250, 0.1);
 		--color-muted: #94a3b8;
+		--color-success: #4ade80;
+		--color-error: #f87171;
+		--color-warning: #fde047;
 	}
 }
 
@@ -40,23 +48,22 @@
 
 // 4. Global base styles
 html {
-	font-size: 16px;
-	scroll-behavior: smooth;
+	font-family: var(--font-sans);
 	background: var(--color-bg);
 	color: var(--color-text);
-	font-family: var(--font-sans);
-	transition: background 0.3s, color 0.3s;
+	scroll-behavior: smooth;
+	min-height: 100%;
+	transition: background var(--transition),
+		color var(--transition);
 }
 
 body {
-	min-height: 100vh;
 	background: var(--color-bg);
 	color: var(--color-text);
-	font-family: var(--font-sans);
-	font-size: clamp(1rem, 2vw, 1.125rem);
-	line-height: 1.6;
-	letter-spacing: 0.01em;
-	transition: background 0.3s, color 0.3s;
+	min-height: 100vh;
+	margin: 0;
+	transition: background var(--transition),
+		color var(--transition);
 }
 
 h1,
@@ -65,32 +72,28 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: var(--font-sans);
-	font-weight: 800;
-	color: var(--color-primary);
+	font-weight: 700;
+	color: var(--color-text);
 	letter-spacing: -0.01em;
-	margin-bottom: 0.5em;
 }
 h1 {
-	font-size: clamp(2.25rem, 5vw, 3rem);
+	font-size: 2.5rem;
 }
 h2 {
-	font-size: clamp(1.5rem, 4vw, 2.25rem);
+	font-size: 2rem;
 }
 h3 {
-	font-size: clamp(1.25rem, 3vw, 1.5rem);
+	font-size: 1.5rem;
 }
 
 // 5. Utility classes for spacing and layout
 .section {
-	padding: clamp(2rem, 6vw, 5rem) 0;
+	padding: 3rem 0;
 }
 .container {
 	max-width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 2rem;
-	padding-right: 2rem;
+	margin: 0 auto;
+	padding: 0 1.5rem;
 }
 
 // 6. Buttons
@@ -99,25 +102,20 @@ h3 {
 button,
 [type='button'],
 [type='submit'] {
-	@include flex-center;
-	font-family: var(--font-sans);
-	font-weight: 700;
-	font-size: 1.125rem;
 	background: linear-gradient(
 		90deg,
-		var(--color-primary),
-		var(--color-secondary)
+		var(--color-primary) 60%,
+		var(--color-accent) 100%
 	);
 	color: #fff;
 	border: none;
-	border-radius: $border-radius;
-	padding: 1rem 2.5rem;
-	margin: 1rem 0;
-	box-shadow: 0 2px 8px 0 rgba(37, 99, 235, 0.08);
+	border-radius: var(--radius);
+	font-weight: 600;
+	padding: 0.75rem 2rem;
+	box-shadow: var(--color-shadow);
+	transition: background var(--transition),
+		color var(--transition), box-shadow var(--transition);
 	cursor: pointer;
-	transition: background 0.2s, box-shadow 0.2s, color 0.2s;
-	outline: none;
-	gap: 0.5rem;
 }
 .button-custom:hover,
 .btn:hover,
@@ -126,11 +124,11 @@ button:hover,
 [type='submit']:hover {
 	background: linear-gradient(
 		90deg,
-		var(--color-secondary),
-		var(--color-primary)
+		var(--color-accent) 0%,
+		var(--color-primary) 100%
 	);
 	color: #fff;
-	box-shadow: 0 4px 16px 0 rgba(37, 99, 235, 0.12);
+	box-shadow: 0 6px 32px 0 rgba(37, 99, 235, 0.15);
 }
 .button-custom:focus,
 .btn:focus,
@@ -140,28 +138,35 @@ button:focus,
 	outline: 2px solid var(--color-primary);
 	outline-offset: 2px;
 }
+button[aria-label='Toggle dark mode'] {
+	outline: none !important;
+	box-shadow: none;
+}
+button[aria-label='Toggle dark mode']:focus {
+	outline: none !important;
+	box-shadow: none;
+}
 
 // 7. Inputs
 input,
 textarea,
 select {
-	font-family: var(--font-sans);
-	font-size: 1rem;
-	background: var(--color-card);
+	background: var(--color-bg-secondary);
 	color: var(--color-text);
 	border: 1.5px solid var(--color-border);
-	border-radius: $border-radius;
-	padding: 1rem 1.25rem;
-	margin-bottom: 1.5rem;
-	transition: border 0.2s, box-shadow 0.2s;
-	box-shadow: 0 1px 4px 0 rgba(30, 41, 59, 0.04);
+	border-radius: var(--radius);
+	padding: 0.75rem 1rem;
+	font-size: 1rem;
+	transition: border var(--transition),
+		background var(--transition), color var(--transition);
+	box-shadow: none;
 }
 input:focus,
 textarea:focus,
 select:focus {
 	border-color: var(--color-primary);
-	box-shadow: 0 0 0 2px var(--color-primary);
 	outline: none;
+	background: var(--color-card);
 }
 
 // 8. Cards & modals
@@ -169,54 +174,149 @@ select:focus {
 .modal,
 .idea-card {
 	background: var(--color-card);
-	border-radius: 1.5rem;
-	box-shadow: 0 2px 16px 0 rgba(30, 41, 59, 0.08);
+	border-radius: var(--radius);
+	box-shadow: var(--color-shadow);
 	border: 1.5px solid var(--color-border);
-	padding: 2.5rem;
-	margin-bottom: 2.5rem;
-	transition: background 0.3s, color 0.3s, box-shadow 0.2s;
+	transition: background var(--transition),
+		color var(--transition), box-shadow var(--transition);
 }
 
 // 9. Error, success, and info states
 .error-message {
 	background: var(--color-error);
 	color: #fff;
-	border-radius: $border-radius;
-	padding: 1rem 1.5rem;
-	margin: 1.5rem 0;
-	font-weight: 600;
+	border-radius: var(--radius);
+	padding: 0.75rem 1.25rem;
+	margin: 1rem 0;
+	font-weight: 500;
 	box-shadow: 0 2px 8px 0 rgba(239, 68, 68, 0.08);
 }
 .success-message {
 	background: var(--color-success);
 	color: #fff;
-	border-radius: $border-radius;
-	padding: 1rem 1.5rem;
-	margin: 1.5rem 0;
-	font-weight: 600;
+	border-radius: var(--radius);
+	padding: 0.75rem 1.25rem;
+	margin: 1rem 0;
+	font-weight: 500;
 	box-shadow: 0 2px 8px 0 rgba(34, 197, 94, 0.08);
 }
 
-// 10. Responsive helpers
+::-webkit-scrollbar {
+	width: 10px;
+	background: var(--color-bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+	background: var(--color-border);
+	border-radius: 8px;
+}
+
 @media (max-width: 768px) {
 	.container {
-		padding-left: 1rem;
-		padding-right: 1rem;
-	}
-	.card,
-	.modal,
-	.idea-card {
-		padding: 1.25rem;
+		padding: 0 0.75rem;
 	}
 	h1 {
-		font-size: clamp(1.5rem, 8vw, 2.25rem);
+		font-size: 2rem;
 	}
 	h2 {
-		font-size: clamp(1.25rem, 6vw, 1.5rem);
+		font-size: 1.5rem;
+	}
+	h3 {
+		font-size: 1.2rem;
 	}
 }
 
-// 11. Smooth theme transitions
+/* === Modern Dark Mode Toggle Switch === */
+.dark-toggle-switch {
+	--toggle-size: 2.5rem;
+	--toggle-bg: var(--color-bg-secondary, #f3f4f6);
+	--toggle-bg-dark: var(--color-bg-secondary-dark, #1e293b);
+	--toggle-border: var(--color-border, #d1d5db);
+	--toggle-border-dark: var(--color-border-dark, #334155);
+	--toggle-glow: 0 0 0 0.15rem var(--color-primary, #0891b2);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--toggle-size);
+	height: var(--toggle-size);
+	border-radius: 9999px;
+	background: var(--toggle-bg);
+	border: 2px solid var(--toggle-border);
+	box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.04);
+	cursor: pointer;
+	transition: background 0.3s, border 0.3s, box-shadow 0.2s,
+		transform 0.2s;
+	position: relative;
+	outline: none;
+}
+.dark-toggle-switch.dark {
+	background: var(--toggle-bg-dark);
+	border-color: var(--toggle-border-dark);
+}
+.dark-toggle-switch:focus-visible {
+	box-shadow: 0 0 0 2px var(--color-primary, #0891b2);
+}
+.dark-toggle-switch:hover {
+	box-shadow: 0 0 0 0.25rem var(--color-primary, #0891b2),
+		0 2px 12px 0 rgba(0, 0, 0, 0.08);
+	transform: scale(1.08);
+}
+.icon-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+.icon {
+	display: block;
+	width: 1.75rem;
+	height: 1.75rem;
+	color: var(--color-primary, #0891b2);
+	transition: transform 0.5s cubic-bezier(0.4, 2, 0.6, 1),
+		color 0.3s;
+}
+.dark-toggle-switch .icon {
+	color: var(--color-accent, #f472b6);
+}
+/* Sun/Moon animation */
+.icon-sun .moon-crescent {
+	opacity: 0;
+	transform: scale(0.7) rotate(-30deg);
+	transition: opacity 0.3s,
+		transform 0.5s cubic-bezier(0.4, 2, 0.6, 1);
+}
+.icon-sun .sun-rays {
+	opacity: 1;
+	transform: scale(1) rotate(0deg);
+	transition: opacity 0.3s,
+		transform 0.5s cubic-bezier(0.4, 2, 0.6, 1);
+}
+.icon-moon .moon-crescent {
+	opacity: 1;
+	transform: scale(1) rotate(0deg);
+	transition: opacity 0.3s,
+		transform 0.5s cubic-bezier(0.4, 2, 0.6, 1);
+}
+.icon-moon .sun-rays {
+	opacity: 0;
+	transform: scale(0.7) rotate(30deg);
+	transition: opacity 0.3s,
+		transform 0.5s cubic-bezier(0.4, 2, 0.6, 1);
+}
+/* Accessibility: visually hide the label but keep for screen readers */
+.dark-toggle-switch .sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+/* === End Dark Mode Toggle Switch === */
+
 html,
 body,
 .card,
@@ -226,32 +326,7 @@ input,
 textarea,
 select,
 button {
-	transition: background 0.3s, color 0.3s, border 0.2s,
-		box-shadow 0.2s;
+	transition: background var(--transition),
+		color var(--transition), box-shadow var(--transition),
+		border var(--transition);
 }
-
-// 12. Utility: visually hidden (for a11y)
-.visually-hidden {
-	position: absolute !important;
-	width: 1px !important;
-	height: 1px !important;
-	padding: 0 !important;
-	margin: -1px !important;
-	overflow: hidden !important;
-	clip: rect(0, 0, 0, 0) !important;
-	white-space: nowrap !important;
-	border: 0 !important;
-}
-
-// 13. Remove default outline for mouse users, keep for keyboard
-:focus:not(:focus-visible) {
-	outline: none;
-}
-
-// 14. Dark mode toggle animation (for header button)
-.theme-toggle {
-	transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-}
-
-// 15. Remove legacy styles
-// (No legacy styles found, but this is a placeholder for future cleanup)
