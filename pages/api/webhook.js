@@ -86,7 +86,10 @@ export default async function handler(req, res) {
 		const sub = event.data.object;
 		const stripeId = sub.id;
 		// Find the subscription by stripeId
-		const subscription = await prisma.subscription.findUnique({ where: { stripeId } });
+		const subscription =
+			await prisma.subscription.findUnique({
+				where: { stripeId },
+			});
 		if (subscription) {
 			await prisma.subscription.update({
 				where: { stripeId },
