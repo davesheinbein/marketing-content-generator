@@ -1,0 +1,33 @@
+{
+	"name": "marketing-content-generator",
+	"version": "1.0.0",
+	"description": "A SaaS app that generates creative marketing ideas with AI.",
+	"main": "index.js",
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"test": "jest"
+	},
+	"author": "",
+	"license": "MIT",
+	"dependencies": {
+		"@paypal/react-paypal-js": "^8.8.3",
+		"@prisma/client": "^6.9.0",
+		"@prisma/extension-accelerate": "^2.0.1",
+		"next": "^14.2.0",
+		"next-auth": "^4.24.5",
+		"openai": "^4.50.0",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"sass": "^1.89.1",
+		"stripe": "^14.23.0",
+		"tailwindcss": "^3.4.1"
+	},
+	"devDependencies": {
+		"@testing-library/react": "^14.2.1",
+		"jest": "^29.7.0",
+		"node-mocks-http": "^1.12.3",
+		"prisma": "^6.9.0"
+	}
+}

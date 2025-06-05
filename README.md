@@ -26,6 +26,13 @@ Features OAuth login, Stripe/PayPal payments, user dashboard, idea history, and 
    ```
 5. Set up Stripe & PayPal products/plans.
 
+## Notes
+
+- Make sure all required environment variables are set in `.env.local`.
+- Stripe and PayPal products/plans must be created in your respective dashboards and their IDs added to the environment/config files.
+- For production, swap the in-memory rate limiter with a persistent store (e.g., Redis).
+- Test coverage is provided for API routes and utility functions in the `__tests__` directory.
+
 ## Legal
 
 - [Terms of Service](pages/terms.js)
