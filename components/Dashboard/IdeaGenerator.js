@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import Loader from '../Loader';
-import ErrorMessage from '../ErrorMessage';
+import Loader from '../ui/Loader';
+import ErrorMessage from '../ui/ErrorMessage';
 
 console.log('[IdeaGenerator] Component loaded');
 

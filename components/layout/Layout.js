@@ -101,7 +101,13 @@ export default function Layout({ children }) {
 						href='/pricing'
 						className='hover:text-blue-600 dark:hover:text-blue-300 transition'
 					>
-						Upgrade
+						Pricing
+					</Link>
+					<Link
+						href='/about'
+						className='hover:text-blue-600 dark:hover:text-blue-300 transition'
+					>
+						About
 					</Link>
 					<Link
 						href='/terms'
@@ -269,7 +275,14 @@ export default function Layout({ children }) {
 						className='rounded px-4 py-3 text-lg hover:bg-blue-100 dark:hover:bg-gray-800 transition'
 						onClick={handleOverlayClick}
 					>
-						Upgrade
+						Pricing
+					</Link>
+					<Link
+						href='/about'
+						className='rounded px-4 py-3 text-lg hover:bg-blue-100 dark:hover:bg-gray-800 transition'
+						onClick={handleOverlayClick}
+					>
+						About
 					</Link>
 					<Link
 						href='/terms'

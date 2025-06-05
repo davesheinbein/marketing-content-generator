@@ -1,5 +1,5 @@
-import Pricing from '../components/Pricing';
-import Layout from '../components/Layout';
+import Pricing from '../components/pricing/Pricing';
+import Layout from '../components/layout/Layout';
 import Link from 'next/link';
 
 export default function Home() {
