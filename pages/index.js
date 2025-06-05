@@ -7,9 +7,14 @@ export default function Home() {
 		<Layout>
 			<section className='text-center py-20'>
 				<img
-					src='/logo.svg'
+					src='https://i.imgur.com/1jPtNmW.png'
 					alt='logo'
-					className='mx-auto h-16 mb-4'
+					className='mx-auto mb-8'
+					style={{
+						height: '20rem',
+						width: '20rem',
+						maxWidth: '90vw',
+					}}
 				/>
 				<h1 className='text-4xl font-extrabold mb-4 text-blue-800'>
 					Marketing Idea Generator
@@ -21,12 +26,14 @@ export default function Home() {
 				</p>
 				<Link
 					href='/dashboard'
-					className='bg-blue-600 text-white px-8 py-3 rounded hover:bg-blue-700 transition'
+					className='bg-blue-600 text-white px-8 py-3 rounded hover:bg-blue-700 transition inline-block'
 				>
 					Get Started
 				</Link>
+				<div className='flex justify-center mt-4'>
+					<Pricing />
+				</div>
 			</section>
-			<Pricing />
 		</Layout>
 	);
 }

@@ -25,12 +25,12 @@ export default function Layout({ children }) {
 						className='md:hidden'
 						onClick={() => setSidebarOpen(!sidebarOpen)}
 						aria-expanded={sidebarOpen}
-						aria-controls='sidebar-nav'
-						aria-label='Open sidebar'
+						aria-controls='mobile-menu'
+						aria-label='Open menu'
 					>
-						<span className='sr-only'>Open sidebar</span>
+						<span className='sr-only'>Open menu</span>
 						<svg
-							className='w-6 h-6 text-blue-600 dark:text-blue-300'
+							className='w-7 h-7 text-blue-600 dark:text-blue-300'
 							fill='none'
 							stroke='currentColor'
 							strokeWidth={2}
@@ -44,11 +44,47 @@ export default function Layout({ children }) {
 						</svg>
 					</button>
 					<Link href='/'>
-						<span className='font-extrabold text-2xl text-blue-700 dark:text-blue-200 tracking-tight cursor-pointer'>
+						<span className='flex items-center font-extrabold text-2xl text-blue-700 dark:text-blue-200 tracking-tight cursor-pointer'>
+							<img
+								src='https://i.imgur.com/1jPtNmW.png'
+								alt='IdeaGen logo'
+								className='h-8 w-8 mr-2 rounded shadow border border-blue-200 dark:border-gray-700 bg-white dark:bg-gray-900 object-contain'
+								style={{
+									background:
+										'linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%)',
+								}}
+							/>
 							IdeaGen
 						</span>
 					</Link>
 				</div>
+				{/* Desktop nav */}
+				<nav className='hidden md:flex gap-6 items-center font-semibold text-base'>
+					<Link
+						href='/dashboard'
+						className='hover:text-blue-600 dark:hover:text-blue-300 transition'
+					>
+						Dashboard
+					</Link>
+					<Link
+						href='/pricing'
+						className='hover:text-blue-600 dark:hover:text-blue-300 transition'
+					>
+						Upgrade
+					</Link>
+					<Link
+						href='/terms'
+						className='hover:text-blue-600 dark:hover:text-blue-300 transition'
+					>
+						Terms
+					</Link>
+					<Link
+						href='/privacy'
+						className='hover:text-blue-600 dark:hover:text-blue-300 transition'
+					>
+						Privacy
+					</Link>
+				</nav>
 				<div className='flex items-center space-x-4'>
 					<button
 						onClick={() => {
@@ -96,54 +132,58 @@ export default function Layout({ children }) {
 					)}
 				</div>
 			</header>
-			{/* Mobile overlay for sidebar */}
+			{/* Mobile menu overlay */}
 			{sidebarOpen && (
 				<div
-					className='fixed inset-0 bg-black bg-opacity-30 z-20 md:hidden'
+					className='fixed inset-0 bg-black bg-opacity-30 z-30 md:hidden'
 					onClick={handleOverlayClick}
 					aria-hidden='true'
 				/>
 			)}
-			{/* Sidebar nav for desktop & mobile */}
-			<aside
-				id='sidebar-nav'
-				className={`fixed top-0 left-0 h-full w-60 bg-white dark:bg-gray-900 shadow-lg z-30 transform transition-transform duration-200 ease-in-out ${
+			{/* Mobile popover menu */}
+			<div
+				id='mobile-menu'
+				className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-900 shadow-lg z-40 transform transition-transform duration-200 ease-in-out ${
 					sidebarOpen
 						? 'translate-x-0'
 						: '-translate-x-full'
-				} md:translate-x-0 md:static md:shadow-none`}
+				} md:hidden`}
 				tabIndex='-1'
-				aria-label='Sidebar navigation'
+				aria-label='Mobile navigation'
 			>
-				<nav className='flex flex-col gap-1 py-8 px-6'>
+				<nav className='flex flex-col gap-2 py-10 px-8'>
 					<Link
 						href='/dashboard'
-						className='rounded px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-800 transition'
+						className='rounded px-4 py-3 text-lg hover:bg-blue-100 dark:hover:bg-gray-800 transition'
+						onClick={handleOverlayClick}
 					>
 						Dashboard
 					</Link>
 					<Link
 						href='/pricing'
-						className='rounded px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-800 transition'
+						className='rounded px-4 py-3 text-lg hover:bg-blue-100 dark:hover:bg-gray-800 transition'
+						onClick={handleOverlayClick}
 					>
 						Upgrade
 					</Link>
 					<Link
 						href='/terms'
-						className='rounded px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-800 transition'
+						className='rounded px-4 py-3 text-lg hover:bg-blue-100 dark:hover:bg-gray-800 transition'
+						onClick={handleOverlayClick}
 					>
 						Terms
 					</Link>
 					<Link
 						href='/privacy'
-						className='rounded px-4 py-2 hover:bg-blue-100 dark:hover:bg-gray-800 transition'
+						className='rounded px-4 py-3 text-lg hover:bg-blue-100 dark:hover:bg-gray-800 transition'
+						onClick={handleOverlayClick}
 					>
 						Privacy
 					</Link>
 				</nav>
-			</aside>
+			</div>
 			{/* Main Content */}
-			<main className='md:ml-60 px-6 py-8 max-w-4xl mx-auto'>
+			<main className='px-6 py-8 max-w-4xl mx-auto'>
 				{children}
 			</main>
 		</div>
